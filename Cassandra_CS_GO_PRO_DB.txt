@@ -1,0 +1,107 @@
+CREATE KEYSPACE IF NOT EXISTS CS_GO_PRO_DB WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+USE CS_GO_PRO_DB;
+
+CREATE TABLE IF NOT EXISTS PLAYER(
+	id UUID PRIMARY KEY,
+	nickname TEXT,
+	realname TEXT,
+	age INT,
+	country TEXT,
+	current_team TEXT,
+	teams TEXT,
+	total_kills INT,
+	total_deaths INT,
+	headshot_percentage DOUBLE,
+	maps_played INT,
+	rounds_played INT,
+	kd DOUBLE,
+	kill_death_diff INT,
+	total_opening_kills INT,
+	total_opening_deaths INT,
+	opening_kill_ration DOUBLE,
+	opening_kill_rating DOUBLE,
+	first_kill_won_round DOUBLE,
+	rating DOUBLE,
+	rifle_kills INT,
+	sniper_kills INT,
+	smg_kills INT,
+	pistol_kills INT,
+	grenade_kills INT,
+	other_kills INT,
+	damage_per_round DOUBLE,
+	grenade_dmg_per_round DOUBLE,
+	kills_per_round DOUBLE,
+	assists_per_round DOUBLE,
+	deaths_per_round DOUBLE,
+	saved_by_team INT,
+	saved_team INT,
+	rounds_with_kills DOUBLE,
+	team_win_after_first_kill DOUBLE,
+	zero_kill_rounds INT,
+	one_kill_rounds INT,
+	two_kill_rounds INT,
+	three_kill_rounds INT,
+	four_kill_rounds INT,
+	five_kill_rounds INT
+);
+
+CREATE TABLE IF NOT EXISTS PLAYER(
+	id UUID PRIMARY KEY,
+	nickname TEXT,
+	realname TEXT,
+	age INT,
+	country TEXT
+);
+
+CREATE TABLE IF NOT EXISTS TEAM(
+	id_team UUID PRIMARY KEY,
+	current_team TEXT,
+	teams TEXT
+);
+
+CREATE TABLE IF NOT EXISTS P_STAT(
+	id_p_stat UUID PRIMARY KEY,
+	total_kills INT,
+	total_deaths INT,
+	headshot_percentage DOUBLE,
+	maps_played INT,
+	rounds_played INT,
+	kd DOUBLE,
+	kill_death_diff INT,
+	total_opening_kills INT,
+	total_opening_deaths INT,
+	opening_kill_ration DOUBLE,
+	opening_kill_rating DOUBLE,
+	first_kill_won_round DOUBLE,
+	rating DOUBLE
+);
+
+CREATE TABLE IF NOT EXISTS WEAPON_STAT(
+	id_weapon_stat UUID PRIMARY KEY,
+	rifle_kills INT,
+	sniper_kills INT,
+	smg_kills INT,
+	pistol_kills INT,
+	grenade_kills INT,
+	other_kills INT	
+);
+
+CREATE TABLE IF NOT EXISTS ROUND_STAT(
+	id_round_stat UUID PRIMARY KEY,
+	damage_per_round DOUBLE,
+	grenade_dmg_per_round DOUBLE,
+	kills_per_round DOUBLE,
+	assists_per_round DOUBLE,
+	deaths_per_round DOUBLE,
+	saved_by_team INT,
+	saved_team INT,
+	rounds_with_kills DOUBLE,
+	team_win_after_first_kill DOUBLE,
+	zero_kill_rounds INT,
+	one_kill_rounds INT,
+	two_kill_rounds INT,
+	three_kill_rounds INT,
+	four_kill_rounds INT,
+	five_kill_rounds INT
+);
