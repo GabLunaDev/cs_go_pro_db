@@ -1,7 +1,9 @@
 # cs_go_pro_db
 
-Nomes(){
-Antônio Henrique Leitão Barros
-Daniel de Araujo Procopio da Cunha
-Gabriel de Luna Cavalcanti
+```ts
+enum Nomes{
+  NAME_1 = "Antônio Henrique Leitão Barros",
+  NAME_2 = "Daniel de Araujo Procopio da Cunha",
+  NAME_3 = "Gabriel de Luna Cavalcanti"
 }
+```
