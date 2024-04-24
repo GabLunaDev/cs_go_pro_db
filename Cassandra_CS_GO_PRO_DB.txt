@@ -105,3 +105,123 @@ CREATE TABLE IF NOT EXISTS ROUND_STAT(
 	four_kill_rounds INT,
 	five_kill_rounds INT
 );
+
+
+
+
+
+
+
+-------------------------------- ATUALIZAÇÃO DAS PRIMARY KEYS EM NOVO BANCO DE DADOS CASSANDRA---------------------------
+
+
+
+CREATE TABLE PLAYER(
+    player_id UUID PRIMARY KEY,
+    nickname TEXT,
+    realname TEXT,
+    age INT,
+    country TEXT,
+    current_team TEXT,
+    teams SET<TEXT>,
+    total_kills INT,
+    total_deaths INT,
+    headshot_percentage DOUBLE,
+    maps_played INT,
+    rounds_played INT,
+    kd DOUBLE,
+    kill_death_diff INT,
+    total_opening_kills INT,
+    total_opening_deaths INT,
+    opening_kill_ratio DOUBLE,
+    opening_kill_rating DOUBLE,
+    first_kill_won_round DOUBLE,
+    rating DOUBLE,
+    rifle_kills INT,
+    sniper_kills INT,
+    smg_kills INT,
+    pistol_kills INT,
+    grenade_kills INT,
+    other_kills INT,
+    damage_per_round DOUBLE,
+    grenade_dmg_per_round DOUBLE,
+    kills_per_round DOUBLE,
+    assists_per_round DOUBLE,
+    deaths_per_round DOUBLE,
+    saved_by_team INT,
+    saved_team INT,
+    rounds_with_kills DOUBLE,
+    team_win_after_first_kill DOUBLE,
+    zero_kill_rounds INT,
+    one_kill_rounds INT,
+    two_kill_rounds INT,
+    three_kill_rounds INT,
+    four_kill_rounds INT,
+    five_kill_rounds INT
+);
+
+CREATE TABLE TEAM(
+    id_team UUID PRIMARY KEY,
+    team_name TEXT,
+    players SET<UUID>
+);
+
+CREATE TABLE P_STAT(
+    player_id UUID,
+    stat_id UUID,
+    total_kills INT,
+    total_deaths INT,
+    headshot_percentage DOUBLE,
+    maps_played INT,
+    rounds_played INT,
+    kd DOUBLE,
+    kill_death_diff INT,
+    total_opening_kills INT,
+    total_opening_deaths INT,
+    opening_kill_ratio DOUBLE,
+    opening_kill_rating DOUBLE,
+    first_kill_won_round DOUBLE,
+    rating DOUBLE,
+    PRIMARY KEY (player_id, stat_id)
+);
+
+CREATE TABLE WEAPON_STAT(
+    player_id UUID,
+    stat_id UUID,
+    weapon_type TEXT,
+    kills INT,
+    PRIMARY KEY (player_id, stat_id, weapon_type)
+);
+
+CREATE TABLE ROUND_STAT(
+    player_id UUID,
+    stat_id UUID,
+    round_id UUID,
+    damage_per_round DOUBLE,
+    grenade_dmg_per_round DOUBLE,
+    kills_per_round DOUBLE,
+    assists_per_round DOUBLE,
+    deaths_per_round DOUBLE,
+    saved_by_team INT,
+    saved_team INT,
+    rounds_with_kills DOUBLE,
+    team_win_after_first_kill DOUBLE,
+    zero_kill_rounds INT,
+    one_kill_rounds INT,
+    two_kill_rounds INT,
+    three_kill_rounds INT,
+    four_kill_rounds INT,
+    five_kill_rounds INT,
+    PRIMARY KEY (player_id, stat_id, round_id)
+);
+
+CREATE TABLE PLAYER_MATCH_HISTORY(
+    player_id UUID,
+    match_id UUID,
+    match_date TIMESTAMP,
+    match_result TEXT,
+    PRIMARY KEY (player_id, match_id)
+);
+
+
+
