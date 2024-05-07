@@ -2,22 +2,14 @@ CREATE KEYSPACE cs_db WITH replication = {'class':'SimpleStrategy', 'replication
 
 USE cs_db;
 
-CREATE TABLE IF NOT EXISTS player (
+CREATE TABLE IF NOT EXISTS player_info (
     player_id UUID PRIMARY KEY,
     nickname TEXT,
     realname TEXT,
     age INT,
     country TEXT,
-);
-
-CREATE TABLE IF NOT EXISTS team (
-    player_id UUID PRIMARY KEY,
     current_team TEXT,
-    teams SET<TEXT>
-);
-
-CREATE TABLE IF NOT EXISTS p_stat (
-    player_id UUID PRIMARY KEY,
+    teams SET<TEXT>,
     total_kills INT,
     total_deaths INT,
     headshot_percentage DOUBLE,
@@ -30,21 +22,13 @@ CREATE TABLE IF NOT EXISTS p_stat (
     opening_kill_ratio DOUBLE,
     opening_kill_rating DOUBLE,
     first_kill_won_round DOUBLE,
-    rating DOUBLE
-);
-
-CREATE TABLE IF NOT EXISTS weapon_stat (
-    player_id UUID PRIMARY KEY,
+    rating DOUBLE,
     rifle_kills INT,
     sniper_kills INT,
     smg_kills INT,
     pistol_kills INT,
     grenade_kills INT,
-    other_kills INT
-);
-
-CREATE TABLE IF NOT EXISTS round_stat (
-    player_id UUID PRIMARY KEY,
+    other_kills INT,
     damage_per_round DOUBLE,
     grenade_dmg_per_round DOUBLE,
     kills_per_round DOUBLE,
