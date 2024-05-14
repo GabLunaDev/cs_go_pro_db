@@ -4,14 +4,14 @@ from cassandra.cluster import Cluster
 cluster = Cluster(['127.0.0.1'], port = 9042)  # Replace with your Cassandra cluster address
 session = cluster.connect()
 
-# Create keyspace and table
+########################## CREATE KEYSPACE DO CSGO ################################
 session.execute("""
     CREATE KEYSPACE IF NOT EXISTS cs_go
     WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}
 """)
 session.set_keyspace('cs_go')
 
-# Create player_info table
+#################### Create player_info table INTO CASSANDRA #######################
 session.execute("""
     CREATE TABLE IF NOT EXISTS player_info (
         player_id INT PRIMARY KEY,
