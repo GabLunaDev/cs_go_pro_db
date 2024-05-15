@@ -1,21 +1,22 @@
 from cassandra.cluster import Cluster
 import mysql.connector
 
-# Connect to Cassandra
-cluster = Cluster(['127.0.0.1'])  # Replace with your Cassandra cluster address
-session = cluster.connect('cs_go')  # Assuming your keyspace is named 'cs_go'
 
-# Connect to MySQL
+cluster = Cluster(['127.0.0.1'])  ####serve localhost tb, mas usei o IP do cluster
+session = cluster.connect('cs_go_new2')  ###### keyspace a ser atingido dentro do cluster
+
+
+
 mysql_connection = mysql.connector.connect(
-    host="localhost",  # Replace with your MySQL host
-    user="root",  # Replace with your MySQL username
-    password="12345678",  # Replace with your MySQL password
-    database="csgo_players"  # Replace with your MySQL database name
+    host="localhost",
+    user="root",
+    password="12345678",
+    database="csgo_players"
 )
 mysql_cursor = mysql_connection.cursor(dictionary=True)
 
 
-# Define function to fetch data from MySQL and insert into Cassandra
+
 def transfer_data(mysql_table, cassandra_fields):
     mysql_cursor.execute(f"SELECT * FROM {mysql_table}")
     rows = mysql_cursor.fetchall()
@@ -41,7 +42,7 @@ transfer_data('team', ['player_id', 'current_team', 'teams'])
 transfer_data('p_stat', ['player_id', 'total_kills', 'total_deaths', 'headshot_percentage',
                          'maps_played', 'rounds_played', 'kills_to_death_diff',
                          'total_opening_kills', 'total_opening_deaths', 'opening_kill_ratio',
-                         'opening_kill_rating', 'first_kill_won_rounds', 'rating'])
+                         'opening_kill_rating', 'first_kill_in_won_rounds', 'rating'])
 transfer_data('weapon_stat', ['player_id', 'rifle_kills', 'sniper_kills', 'smg_kills',
                               'pistol_kills', 'grenade_kills', 'other_kills'])
 transfer_data('round_stat', ['player_id', 'damage_per_round', 'grenade_dmg_per_round',

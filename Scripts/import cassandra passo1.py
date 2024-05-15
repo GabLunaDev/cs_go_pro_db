@@ -1,4 +1,3 @@
-# Connect to Cassandra
 from cassandra.cluster import Cluster
 
 cluster = Cluster(['127.0.0.1'], port = 9042)  # Replace with your Cassandra cluster address
@@ -6,12 +5,12 @@ session = cluster.connect()
 
 ########################## CREATE KEYSPACE DO CSGO ################################
 session.execute("""
-    CREATE KEYSPACE IF NOT EXISTS cs_go
+    CREATE KEYSPACE IF NOT EXISTS cs_go_new2
     WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}
 """)
-session.set_keyspace('cs_go')
+session.set_keyspace('cs_go_new2')
 
-#################### Create player_info table INTO CASSANDRA #######################
+#################### CRIANDO NOSSA TABLE PLAYERINFO DENTRO DO CONTAINER  #######################
 session.execute("""
     CREATE TABLE IF NOT EXISTS player_info (
         player_id INT PRIMARY KEY,
@@ -31,7 +30,7 @@ session.execute("""
         total_opening_deaths INT,
         opening_kill_ratio DOUBLE,
         opening_kill_rating DOUBLE,
-        first_kill_won_rounds DOUBLE,
+        first_kill_in_won_rounds DOUBLE,
         rating DOUBLE,
         rifle_kills INT,
         sniper_kills INT,
@@ -57,13 +56,5 @@ session.execute("""
     )
 """)
 
-# Query data from MySQL and insert into Cassandra
-# Replace this part with your MySQL querying code and loop through the result set
-# Insert each row into the Cassandra table
-# Ensure to handle any data type conversions if necessary
 
-# Example of inserting data into Cassandra
-
-
-# Close Cassandra connection
 cluster.shutdown()
